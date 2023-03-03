@@ -38,7 +38,7 @@ jobs:
       - name: Build
         run: pnpm run build
       - name: Release
-        uses: modern-js-dev/actions@v2
+        uses: modern-js-dev/actions@fix-action
         with:
           # this expects you to have a script called release which does a build for your packages and calls modern publish
           version: "canary"
@@ -64,7 +64,7 @@ jobs:
             ${{ steps.version.outputs.comment }}
   release:
     name: Release
-    if: ${{ !github.event.issue.issue_comment }}
+    if: ${{ github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -83,7 +83,7 @@ jobs:
       - name: Build
         run: pnpm run build
       - name: Release
-        uses: modern-js-dev/actions@v2
+        uses: modern-js-dev/actions@fix-action
         with:
           # this expects you to have a script called release which does a build for your packages and calls modern publish
           version: ${{ github.event.inputs.version }}
