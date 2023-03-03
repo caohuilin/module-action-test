@@ -51,19 +51,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           REPOSITORY: ${{ github.repository }}
-          REF: ${{ github.event.pull_request.head.sha }}
-      - name: Get package version
-        id: version
-        run: |
-          comment=1.0.0
-          echo "::set-output name=comment::$comment"
-      - name: Write a new comment
-        uses: peter-evans/create-or-update-comment@v1.4.5
-        continue-on-error: true
-        with:
-          issue-number: ${{ github.event.issue.number }}
-          body: |
-            ${{ steps.version.outputs.comment }}
+          PULL_REQUEST_NUMBER: ${{ github.event.issue.number }}
   release:
     name: Release
     if: ${{ github.event_name == 'workflow_dispatch' }}
@@ -96,4 +84,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           REPOSITORY: ${{ github.repository }}
-          REF: ${{ github.ref }}
+
