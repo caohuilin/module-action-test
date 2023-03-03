@@ -44,7 +44,6 @@ jobs:
           # this expects you to have a script called release which does a build for your packages and calls modern publish
           version: "canary"
           type: "release"
-          branch: ${{ github.ref_name }}
           tools: "modern"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
