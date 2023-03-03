@@ -31,10 +31,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "16"
-      - name: Get Branch name
-        id: branchName
-        run: |
-          echo ::set-output name=branch::$(echo $PR_COMMENT | cut -d "[" -f2 | cut -d "]" -f1)
+          ref: refs/pull/${{ github.event.issue.number }}/head
       - name: Install node_modules
         run: |
           npm install -g pnpm@7.25.0
@@ -53,7 +50,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           REPOSITORY: ${{ github.repository }}
-          REF: ${{ steps.branchName.outputs.branch }}
+          REF: ${{ github.event.pull_request.head.sha }}
       - name: Get package version
         id: version
         run: |
