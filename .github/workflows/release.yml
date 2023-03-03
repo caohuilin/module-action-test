@@ -24,14 +24,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@master
+        uses: actions/checkout@v3
         with:
           # This makes Actions fetch only one branch to release
           fetch-depth: 1
+          ref: refs/pull/${{ github.event.issue.number }}/head
       - uses: actions/setup-node@v3
         with:
           node-version: "16"
-          ref: refs/pull/${{ github.event.issue.number }}/head
       - name: Install node_modules
         run: |
           npm install -g pnpm@7.25.0
@@ -46,6 +46,7 @@ jobs:
           version: "canary"
           type: "release"
           tools: "modern"
+          branch: ""
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
