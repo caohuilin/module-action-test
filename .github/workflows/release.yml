@@ -19,6 +19,7 @@ on:
 jobs:
   issue_commentd:
     name: Release with commentd
+    permissions: write-all
     if: github.event.issue.pull_request && contains(github.event.comment.body, '!snapshot')
     runs-on: ubuntu-latest
     steps:
@@ -43,7 +44,7 @@ jobs:
           # this expects you to have a script called release which does a build for your packages and calls modern publish
           version: "canary"
           type: "release"
-          branch: ${{ github.ref_name }}
+          branch: ${{ github.head_ref }}
           tools: "modern"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
