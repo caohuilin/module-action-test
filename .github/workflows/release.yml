@@ -19,8 +19,8 @@ on:
 jobs:
   issue_commentd:
     name: Release with commentd
-    runs-on: ubuntu-latest
     if: github.event.issue.pull_request && contains(github.event.comment.body, '!snapshot')
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
@@ -40,11 +40,11 @@ jobs:
       - name: Release
         uses: modern-js-dev/actions@v2
         with:
-          # this expects you to have a script called release which does a build for your packages and calls changeset publish
+          # this expects you to have a script called release which does a build for your packages and calls modern publish
           version: "canary"
           type: "release"
           branch: ${{ github.ref_name }}
-          tools: "changeset"
+          tools: "modern"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -64,8 +64,8 @@ jobs:
             ${{ steps.version.outputs.comment }}
   release:
     name: Release
-    runs-on: ubuntu-latest
     if: ${{ !github.event.issue.issue_comment }}
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
@@ -85,11 +85,11 @@ jobs:
       - name: Release
         uses: modern-js-dev/actions@v2
         with:
-          # this expects you to have a script called release which does a build for your packages and calls changeset publish
+          # this expects you to have a script called release which does a build for your packages and calls modern publish
           version: ${{ github.event.inputs.version }}
           type: "release"
           branch: ${{ github.ref_name }}
-          tools: "changeset"
+          tools: "modern"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
