@@ -19,7 +19,6 @@ on:
 jobs:
   issue_commentd:
     name: Release with commentd
-    permissions: write-all
     if: github.event.issue.pull_request && contains(github.event.comment.body, '!snapshot')
     runs-on: ubuntu-latest
     steps:
