@@ -34,7 +34,6 @@ jobs:
           node-version: "16"
       - name: Install node_modules
         run: |
-          echo ${{ github.event.comment }}
           npm install -g pnpm@7.25.0
           pnpm -v
           pnpm install
@@ -53,6 +52,7 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           REPOSITORY: ${{ github.repository }}
           PULL_REQUEST_NUMBER: ${{ github.event.issue.number }}
+          COMMENT: ${{ toJson(github.event.comment) }}
   release:
     name: Release
     if: ${{ github.event_name == 'workflow_dispatch' }}
