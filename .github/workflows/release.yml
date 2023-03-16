@@ -74,7 +74,7 @@ jobs:
       - name: Build
         run: pnpm run build
       - name: Release
-        uses: modern-js-dev/actions@feat-delete-tag-before-release
+        uses: modern-js-dev/actions@feat-release-tag
         with:
           # this expects you to have a script called release which does a build for your packages and calls modern publish
           version: ${{ github.event.inputs.version }}
@@ -85,4 +85,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           REPOSITORY: ${{ github.repository }}
+          ONLY_RELEASE_TAG: true
 
