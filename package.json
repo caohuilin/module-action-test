@@ -1,6 +1,6 @@
 {
   "name": "@modernjs-test/module-action-test",
-  "version": "0.1.9",
+  "version": "0.2.0",
   "jsnext:source": "./src/index.ts",
   "types": "./dist/types/index.d.ts",
   "main": "./dist/lib/index.js",
@@ -53,5 +53,10 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
+  },
+  "pnpm": {
+    "overrides": {
+      "@modern-js/plugin-changeset": "2.22.1-beta.5"
+    }
   }
 }

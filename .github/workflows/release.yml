@@ -33,13 +33,13 @@ jobs:
           node-version: "16"
       - name: Install node_modules
         run: |
-          npm install -g pnpm@7.25.0
+          npm install -g pnpm@8
           pnpm -v
           pnpm install
       - name: Build
         run: pnpm run build
       - name: Release
-        uses: modern-js-dev/actions@feat-tag-branch
+        uses: modern-js-dev/actions@feat-release-provenance
         with:
           # this expects you to have a script called release which does a build for your packages and calls modern publish
           version: ${{ github.event.inputs.version }}
